@@ -16,30 +16,43 @@ class PixelObject {
   float a;
   boolean isGreen;
 
-  PixelObject(int px, int py, float rx, float gx, float bx, float ax/*, boolean isGreenx*/) {
+  PixelObject(int px, int py, float rx, float gx, float bx, float ax, boolean isGreenx) {
     x = px;
     y = py;
     r = rx;
     g = gx;
     b = bx;
     a = ax;
-    //isGreen = isGreenx;
+    isGreen = isGreenx;
   }
 
   //main show() function
-  void show(int func) {
+  void show(int func, int xAdd, int yAdd, float cR, float cG, float cB) {
     if (func == 1) {
-      downscale(20, 20);//calling downscale() if '1'
+      downscale(xAdd, yAdd);//calling downscale() if '1'
     }
     if (func == 2) {
-      downscale(10, 20);//calling downscale() if '2'
+      rainbowfy(xAdd, yAdd, cR, cG, cB);//calling rainbowfy() if '2'
     }
-  }
+  }//end of "void show()"
 
-  //whatever functions we want
+  /*************************************/
+  /*WHATEVER FUNCTIONS WE WANT TO WRITE*/
   void downscale(int sizeX, int sizeY) {
-    stroke(r, g, b, a);
+    noStroke();
     fill(r, g, b, a);
     rect(x, y, sizeX, sizeY);
-  }
+  }//end of "void downscale()"
+
+  void rainbowfy(int sizeX, int sizeY, float randomColorR, float randomColorG, float randomColorB) {
+    if (isGreen) {
+      r = randomColorR;
+      g = randomColorG;
+      b = randomColorB;
+    }
+    noStroke();
+    fill(r, g, b, a);
+    rect(x, y, sizeX, sizeY);
+  }//end of "void rainbowfy()"
+  /*************************************/
 }
